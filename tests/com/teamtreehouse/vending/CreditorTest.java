@@ -1,5 +1,6 @@
 package com.teamtreehouse.vending;
 
+import org.junit.Before;
 import org.junit.Test;
 
 import static org.junit.Assert.*;
@@ -8,11 +9,16 @@ import static org.junit.Assert.*;
  * Created by jpriv on 9/19/2017.
  */
 public class CreditorTest {
+    Creditor creditor;
+
+    @Before
+    public void setUp() throws Exception {
+        //Arrange
+        creditor = new Creditor();
+    }
 
     @Test
     public void addingFundsIncrementsAvailableFunds() throws Exception {
-        //Arrange
-        Creditor creditor = new Creditor();
         //Act
         creditor.addFunds(25);
         creditor.addFunds(25);
@@ -22,10 +28,8 @@ public class CreditorTest {
 
     @Test
     public void refundingReturnsAllAvailableFunds() throws Exception {
-        //Arrange
-        Creditor creditor = new Creditor();
-        creditor.addFunds(40);
         //Act
+        creditor.addFunds(40);
         int refund = creditor.refund();
         //Assert
         assertEquals(40, refund);
@@ -33,10 +37,8 @@ public class CreditorTest {
 
     @Test
     public void afterRefundAvailableFundsAreZero() throws Exception {
-        //Arrange
-        Creditor creditor = new Creditor();
-        creditor.addFunds(30);
         //Act
+        creditor.addFunds(30);
         creditor.refund();
         //Assert
         assertEquals(0, creditor.getAvailableFunds());
